@@ -5,6 +5,7 @@ name = "pypi"
 
 [packages]
 ib-insync = "*"
+tabulate = "*"
 
 [dev-packages]
 
