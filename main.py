@@ -3,6 +3,7 @@ import argparse
 import download
 import sixmonth
 import vxxvxz
+import cal
 
 
 def main():
@@ -18,6 +19,9 @@ def main():
     vxxvxz_parser = sub_parsers.add_parser("vxxvxz")
     vxxvxz_parser.set_defaults(func=call_vxxvxz)
 
+    calendar_parser = sub_parsers.add_parser("calendar")
+    calendar_parser.set_defaults(func=call_calendar)
+
     args = parser.parse_args()
     args.func(args)
 
@@ -32,6 +36,10 @@ def call_sixmonth(*args):
 
 def call_vxxvxz(*args):
     vxxvxz.vxxvxz()
+
+
+def call_calendar(*args):
+    cal.calendar()
 
 
 if __name__ == "__main__":

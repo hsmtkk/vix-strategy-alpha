@@ -7,23 +7,22 @@ import tabulate
 import mydatetime
 import util
 
+
 # 第1限月の残り週数をNとする。
 
-# VXX売り相当 = PUT買い
-# Delta -0.8を目安とする。
-# 第1限月の残り週数をNとする。
+# 期近売り相当 = PUT買い
 # 第1限月 N枚
 # 第2限月 (5-N)枚
 
-# VXZ買い相当 = CALL買い
-# 第3，4，5，6，7限月 各1枚
-# Delta 0.8を目安とする。
+# 期先買い相当 = CALL買い
+# 第2限月 N枚
+# 第3限月 (5-N)枚
 
 PUT_DELTA_THRESHOLD = -0.8
 CALL_DELTA_THRESHOLD = 0.8
 
 
-def vxxvxz():
+def calendar():
     path = os.path.join("./data", "expirations.json")
     with open(path) as f:
         expirations = json.load(f)
@@ -33,7 +32,7 @@ def vxxvxz():
     buy_put(expirations, first, second)
     print()
     print("CALL to buy")
-    buy_call(expirations)
+    buy_call(expirations, first, second)
 
 
 def buy_put(expirations: list[datetime.datetime], first: int, second: int) -> None:
@@ -61,13 +60,13 @@ def put_to_buy(expiration: datetime.datetime) -> None:
             return
 
 
-def buy_call(expirations: list[datetime.datetime]) -> None:
+def buy_call(expirations: list[datetime.datetime], first: int, second: int) -> None:
     table = list()
-    for i in range(2, 7):
-        table.append((i + 1, mydatetime.format_date(expirations[i]), 1))
+    table.append((2, mydatetime.format_date(expirations[1]), first))
+    table.append((3, mydatetime.format_date(expirations[2]), second))
     print(tabulate.tabulate(table, headers=("Month", "Expire date", "Quantity")))
     print()
-    call_to_buy(expirations[6])
+    call_to_buy(expirations[2])
 
 
 def call_to_buy(expiration: datetime.datetime) -> None:
