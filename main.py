@@ -2,6 +2,7 @@ import argparse
 
 import download
 import sixmonth
+import vxxvxz
 
 
 def main():
@@ -14,6 +15,9 @@ def main():
     sixmonth_parser = sub_parsers.add_parser("sixmonth")
     sixmonth_parser.set_defaults(func=call_sixmonth)
 
+    vxxvxz_parser = sub_parsers.add_parser("vxxvxz")
+    vxxvxz_parser.set_defaults(func=call_vxxvxz)
+
     args = parser.parse_args()
     args.func(args)
 
@@ -24,6 +28,10 @@ def call_download(*args):
 
 def call_sixmonth(*args):
     sixmonth.sixmonth()
+
+
+def call_vxxvxz(*args):
+    vxxvxz.vxxvxz()
 
 
 if __name__ == "__main__":

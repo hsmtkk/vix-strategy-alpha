@@ -4,6 +4,10 @@ import datetime
 
 import tabulate
 
+# 第6限月のPUTを購入し、満期まで保有する。
+# Delta -0.8を目安としPUTを購入する。
+
+
 DELTA_THRESHOLD = -0.8
 
 
